@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"errors"
 )
 
 type Store interface {
@@ -42,7 +43,16 @@ func (store *SQLStore) execTx(ctx context.Context, fn func(*Queries) error) erro
 func (store *SQLStore) CreateTransformTx(ctx context.Context, arg CreateTransformParams) (Transform, error) {
 	var transform Transform
 	err := store.execTx(ctx, func(q *Queries) error {
-		var err error
+
+		user, err := q.GetUser(ctx, arg.Owner)
+		if err != nil {
+			return err
+		}
+
+		if user.UrlCount > 0 && user.UserType == "FREE" {
+			return errors.New("you have reached your limit")
+		}
+
 		transform, err = q.CreateTransform(ctx, CreateTransformParams(arg))
 		if err != nil {
 			return err

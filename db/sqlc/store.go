@@ -5,19 +5,25 @@ import (
 	"database/sql"
 )
 
-type Store struct {
-	*Queries
-	db *sql.DB
+type Store interface {
+	Querier
+	CreateTransformTx(ctx context.Context, arg CreateTransformParams) (Transform, error)
+	DeleteTransformTx(ctx context.Context, transformID int64) error
 }
 
-func NewStore(db *sql.DB) *Store {
-	return &Store{
+type SQLStore struct {
+	db *sql.DB
+	*Queries
+}
+
+func NewStore(db *sql.DB) Store {
+	return &SQLStore{
 		db:      db,
 		Queries: New(db),
 	}
 }
 
-func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
+func (store *SQLStore) execTx(ctx context.Context, fn func(*Queries) error) error {
 	tx, err := store.db.BeginTx(ctx, nil)
 	if err != nil {
 		return err
@@ -33,13 +39,7 @@ func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 	return tx.Commit()
 }
 
-type TransformTxParams struct {
-	Owner    string `json:"owner"`
-	LongUrl  string `json:"long_url"`
-	ShortUrl string `json:"short_url"`
-}
-
-func (store *Store) CreateTransformTx(ctx context.Context, arg TransformTxParams) (Transform, error) {
+func (store *SQLStore) CreateTransformTx(ctx context.Context, arg CreateTransformParams) (Transform, error) {
 	var transform Transform
 	err := store.execTx(ctx, func(q *Queries) error {
 		var err error
@@ -58,7 +58,7 @@ func (store *Store) CreateTransformTx(ctx context.Context, arg TransformTxParams
 	return transform, err
 }
 
-func (store *Store) DeleteTransformTx(ctx context.Context, transformID int64) error {
+func (store *SQLStore) DeleteTransformTx(ctx context.Context, transformID int64) error {
 	err := store.execTx(ctx, func(q *Queries) error {
 		var err error
 

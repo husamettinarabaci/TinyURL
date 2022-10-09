@@ -15,7 +15,7 @@ func createRandomUser(t *testing.T) User {
 	require.NoError(t, err)
 
 	arg := CreateUserParams{
-		Username:       util.RandomUsername(),
+		Username:       util.RandomUserName(),
 		HashedPassword: hashedPassword,
 		FullName:       util.RandomFullName(),
 		Email:          util.RandomEmail(),

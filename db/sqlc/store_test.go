@@ -14,7 +14,7 @@ func TestCreateTransformTx(t *testing.T) {
 
 	user := createRandomUser(t)
 
-	result, err := store.CreateTransformTx(context.Background(), TransformTxParams{
+	result, err := store.CreateTransformTx(context.Background(), CreateTransformParams{
 		Owner:    user.Username,
 		LongUrl:  util.RandomLongUrl(),
 		ShortUrl: util.RandomShortUrl(),
@@ -32,7 +32,7 @@ func TestDeleteransformTx(t *testing.T) {
 
 	user := createRandomUser(t)
 
-	result, err := store.CreateTransformTx(context.Background(), TransformTxParams{
+	result, err := store.CreateTransformTx(context.Background(), CreateTransformParams{
 		Owner:    user.Username,
 		LongUrl:  util.RandomLongUrl(),
 		ShortUrl: util.RandomShortUrl(),
@@ -45,7 +45,7 @@ func TestDeleteransformTx(t *testing.T) {
 	require.NoError(t, err)
 
 	user2, err := store.GetUser(context.Background(), user.Username)
-
+	require.NoError(t, err)
 	require.Equal(t, user.UrlCount, user2.UrlCount)
 
 }

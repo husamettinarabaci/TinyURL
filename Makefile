@@ -8,10 +8,10 @@ dropdb:
 	docker exec -it tinyurl_db dropdb tinyurl
 
 migrateup:
-	migrate -path db/migration -database "postgresql://tinyurl:tinyurltinyurl@tinyurl.cruwjtugxx5v.us-east-1.rds.amazonaws.com:5432/tinyurl?sslmode=disable" -verbose up
+	migrate -path db/migration -database "postgresql://tinyurl:tinyurltinyurl@tinyurl.cruwjtugxx5v.us-east-1.rds.amazonaws.com:5432/tinyurl" -verbose up
 
 migratedown:
-	migrate -path db/migration -database "postgresql://tinyurl:tinyurltinyurl@tinyurl.cruwjtugxx5v.us-east-1.rds.amazonaws.com:5432/tinyurl?sslmode=disable" -verbose down
+	migrate -path db/migration -database "postgresql://tinyurl:tinyurltinyurl@tinyurl.cruwjtugxx5v.us-east-1.rds.amazonaws.com:5432/tinyurl" -verbose down
 
 sqlc:
 	sqlc generate
@@ -22,5 +22,5 @@ test:
 server:
 	go run main.go
 
-.PHONY: createdb dropdb migrateup migratedown sqlc test server
+.PHONY: createdb dropdb migrateup migratedown sqlc test server migrateuplocal
 

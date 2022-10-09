@@ -178,7 +178,7 @@ func TestCreateTransformAPI(t *testing.T) {
 				}
 
 				store.EXPECT().
-					CreateTransform(gomock.Any(), gomock.Eq(arg)).
+					CreateTransformTx(gomock.Any(), gomock.Eq(arg)).
 					Times(1).
 					Return(transform, nil)
 			},
@@ -367,7 +367,7 @@ func TestListTransformsAPI(t *testing.T) {
 			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
-			url := "/trasnforms"
+			url := "/transforms"
 			request, err := http.NewRequest(http.MethodGet, url, nil)
 			require.NoError(t, err)
 

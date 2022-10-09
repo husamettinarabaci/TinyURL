@@ -64,12 +64,14 @@ func TestCreateUserAPI(t *testing.T) {
 				"password":  password,
 				"full_name": user.FullName,
 				"email":     user.Email,
+				"user_type": user.UserType,
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				arg := db.CreateUserParams{
 					Username: user.Username,
 					FullName: user.FullName,
 					Email:    user.Email,
+					UserType: user.UserType,
 				}
 				store.EXPECT().
 					CreateUser(gomock.Any(), EqCreateUserParams(arg, password)).
@@ -88,6 +90,7 @@ func TestCreateUserAPI(t *testing.T) {
 				"password":  password,
 				"full_name": user.FullName,
 				"email":     user.Email,
+				"user_type": user.UserType,
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
@@ -106,6 +109,7 @@ func TestCreateUserAPI(t *testing.T) {
 				"password":  password,
 				"full_name": user.FullName,
 				"email":     user.Email,
+				"user_type": user.UserType,
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
@@ -124,6 +128,7 @@ func TestCreateUserAPI(t *testing.T) {
 				"password":  password,
 				"full_name": user.FullName,
 				"email":     user.Email,
+				"user_type": user.UserType,
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
@@ -141,6 +146,7 @@ func TestCreateUserAPI(t *testing.T) {
 				"password":  password,
 				"full_name": user.FullName,
 				"email":     "invalid-email",
+				"user_type": user.UserType,
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
@@ -158,6 +164,7 @@ func TestCreateUserAPI(t *testing.T) {
 				"password":  "123",
 				"full_name": user.FullName,
 				"email":     user.Email,
+				"user_type": user.UserType,
 			},
 			buildStubs: func(store *mockdb.MockStore) {
 				store.EXPECT().
@@ -341,5 +348,7 @@ func requireBodyMatchUser(t *testing.T, body *bytes.Buffer, user db.User) {
 	require.Equal(t, user.Username, gotUser.Username)
 	require.Equal(t, user.FullName, gotUser.FullName)
 	require.Equal(t, user.Email, gotUser.Email)
+	require.Equal(t, user.UserType, gotUser.UserType)
+	require.Equal(t, user.UrlCount, gotUser.UrlCount)
 	require.Empty(t, gotUser.HashedPassword)
 }

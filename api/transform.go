@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	db "github.com/husamettinarabaci/tinyurl/db/sqlc"
 	"github.com/husamettinarabaci/tinyurl/token"
+	"github.com/husamettinarabaci/tinyurl/util"
 )
 
 type createTransformRequest struct {
@@ -23,8 +24,9 @@ func (server *Server) createTransform(ctx *gin.Context) {
 
 	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
 	arg := db.CreateTransformParams{
-		Owner:   authPayload.Username,
-		LongUrl: req.LongUrl,
+		Owner:    authPayload.Username,
+		LongUrl:  req.LongUrl,
+		ShortUrl: util.RandomShortUrl(),
 	}
 
 	transform, err := server.store.CreateTransformTx(ctx, arg)

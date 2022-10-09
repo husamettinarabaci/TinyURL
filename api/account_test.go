@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -394,7 +394,7 @@ func randomTransform(owner string) db.Transform {
 }
 
 func requireBodyMatchTransform(t *testing.T, body *bytes.Buffer, transform db.Transform) {
-	data, err := ioutil.ReadAll(body)
+	data, err := io.ReadAll(body)
 	require.NoError(t, err)
 
 	var gotTransform db.Transform
@@ -404,7 +404,7 @@ func requireBodyMatchTransform(t *testing.T, body *bytes.Buffer, transform db.Tr
 }
 
 func requireBodyMatchTransforms(t *testing.T, body *bytes.Buffer, transforms []db.Transform) {
-	data, err := ioutil.ReadAll(body)
+	data, err := io.ReadAll(body)
 	require.NoError(t, err)
 
 	var gotTransforms []db.Transform

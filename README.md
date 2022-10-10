@@ -114,59 +114,59 @@ page_size = x
 
 ─── TinyURL
 
-├── api
-│   ├── main_test.go
-│   ├── middleware.go
-│   ├── middleware_test.go
-│   ├── server.go
-│   ├── token.go
-│   ├── transform.go
-│   ├── transform_test.go
-│   ├── user.go
-│   ├── user_test.go
-│   └── validator.go
-├── app.env
-├── db
-│   ├── migration
-│   │   ├── 000001_init_schema.down.sql
-│   │   ├── 000001_init_schema.up.sql
-│   │   └── docs
-│   ├── mock
-│   │   └── store.go
-│   ├── query
-│   │   ├── transforms.sql
-│   │   └── user.sql
-│   └── sqlc
-│       ├── db.go
-│       ├── main_test.go
-│       ├── models.go
-│       ├── querier.go
-│       ├── store.go
-│       ├── store_test.go
-│       ├── transforms.sql.go
-│       ├── transforms_test.go
-│       ├── user.sql.go
-│       └── user_test.go
-├── Dockerfile
-├── go.mod
-├── go.sum
-├── main.go
-├── Makefile
-├── README.md
-├── sqlc.yaml
-├── token
-│   ├── jwt_maker.go
-│   ├── jwt_maker_test.go
-│   ├── maker.go
-│   ├── paseto_maker.go
-│   ├── paseto_maker_test.go
-│   └── payload.go
-└── util
-    ├── config.go
-    ├── password.go
-    ├── password_test.go
-    ├── random.go
-    └── usertype.go
+    ├── api
+    │   ├── main_test.go
+    │   ├── middleware.go
+    │   ├── middleware_test.go
+    │   ├── server.go
+    │   ├── token.go
+    │   ├── transform.go
+    │   ├── transform_test.go
+    │   ├── user.go
+    │   ├── user_test.go
+    │   └── validator.go
+    ├── app.env
+    ├── db
+    │   ├── migration
+    │   │   ├── 000001_init_schema.down.sql
+    │   │   ├── 000001_init_schema.up.sql
+    │   │   └── docs
+    │   ├── mock
+    │   │   └── store.go
+    │   ├── query
+    │   │   ├── transforms.sql
+    │   │   └── user.sql
+    │   └── sqlc
+    │       ├── db.go
+    │       ├── main_test.go
+    │       ├── models.go
+    │       ├── querier.go
+    │       ├── store.go
+    │       ├── store_test.go
+    │       ├── transforms.sql.go
+    │       ├── transforms_test.go
+    │       ├── user.sql.go
+    │       └── user_test.go
+    ├── Dockerfile
+    ├── go.mod
+    ├── go.sum
+    ├── main.go
+    ├── Makefile
+    ├── README.md
+    ├── sqlc.yaml
+    ├── token
+    │   ├── jwt_maker.go
+    │   ├── jwt_maker_test.go
+    │   ├── maker.go
+    │   ├── paseto_maker.go
+    │   ├── paseto_maker_test.go
+    │   └── payload.go
+    └── util
+        ├── config.go
+        ├── password.go
+        ├── password_test.go
+        ├── random.go
+        └── usertype.go
 
 ## Tech Stack
 
